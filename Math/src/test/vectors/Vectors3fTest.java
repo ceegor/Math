@@ -9,7 +9,7 @@ public class Vectors3fTest {
     void sum() {
         Vector3f v1 = new Vector3f(1, 2, 3);
         Vector3f v2 = new Vector3f(4, 5, 6);
-        v1.add(v2);
+        v1.addToMe(v2);
         Assertions.assertEquals(5.0, v1.getX(), 1e-7);
         Assertions.assertEquals(7.0, v1.getY(), 1e-7);
         Assertions.assertEquals(9.0, v1.getZ(), 1e-7);
@@ -19,7 +19,7 @@ public class Vectors3fTest {
     void sumWithCreation() {
         Vector3f v1 = new Vector3f(1, 2, 3);
         Vector3f v2 = new Vector3f(4, 5, 6);
-        Vector3f sum = Vector3f.addAndCreate(v1, v2);
+        Vector3f sum = v1.add(v2);
         Assertions.assertEquals(5.0, sum.getX(), 1e-7);
         Assertions.assertEquals(7.0, sum.getY(), 1e-7);
         Assertions.assertEquals(9.0, sum.getZ(), 1e-7);
@@ -29,7 +29,7 @@ public class Vectors3fTest {
     void subtract() {
         Vector3f v1 = new Vector3f(5, 7, 9);
         Vector3f v2 = new Vector3f(2, 3, 4);
-        v1.subtract(v2);
+        v1.subtractFromMe(v2);
         Assertions.assertEquals(3.0, v1.getX(), 1e-7);
         Assertions.assertEquals(4.0, v1.getY(), 1e-7);
         Assertions.assertEquals(5.0, v1.getZ(), 1e-7);
@@ -39,7 +39,7 @@ public class Vectors3fTest {
     void subtractWithCreation() {
         Vector3f v1 = new Vector3f(5, 7, 9);
         Vector3f v2 = new Vector3f(2, 3, 4);
-        Vector3f difference = Vector3f.subtractAndCreate(v1, v2);
+        Vector3f difference = v1.subtract(v2);
         Assertions.assertEquals(3.0, difference.getX(), 1e-7);
         Assertions.assertEquals(4.0, difference.getY(), 1e-7);
         Assertions.assertEquals(5.0, difference.getZ(), 1e-7);
@@ -85,9 +85,9 @@ public class Vectors3fTest {
         Vector3f v = new Vector3f(3, 4, 12);
         v.normalize();
 
-        Assertions.assertEquals(0.2, v.getX(), 1e-7);
-        Assertions.assertEquals(0.3, v.getY(), 1e-7);
-        Assertions.assertEquals(0.9, v.getZ(), 1e-7);
+        Assertions.assertEquals((float) 3/13, v.getX(), 1e-7);
+        Assertions.assertEquals((float) 4/13, v.getY(), 1e-7);
+        Assertions.assertEquals((float) 12/13, v.getZ(), 1e-7);
     }
 
     @Test

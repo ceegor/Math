@@ -5,8 +5,11 @@ public interface Vector<T> {
 
     boolean isEqual(T other);
 
-    void add(T other);
-    void subtract(T other);
+    void addToMe(T other);
+    void subtractFromMe(T other);
+
+    T add(T second);
+    T subtract(T second);
 
     void multiplyByScalar(float scalar);
     void divideByScalar(float scalar) throws ArithmeticException;

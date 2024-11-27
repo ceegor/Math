@@ -1,8 +1,8 @@
 package Vectors;
 
 public class Vector2f implements Vector<Vector2f> {
-    public float x;
-    public float y;
+    private float x;
+    private float y;
 
     public Vector2f(float x, float y) {
         this.x = x;
@@ -23,61 +23,60 @@ public class Vector2f implements Vector<Vector2f> {
                 Math.abs(y - other.y) < epsilon;
     }
 
-    public static Vector2f addAndCreate(Vector2f first, Vector2f second) {
-        return new Vector2f(
-                first.x + second.x,
-                first.y + second.y
-        );
-    }
-
     @Override
-    public void add(Vector2f other) {
+    public void addToMe(Vector2f other) {
         x += other.x;
         y += other.y;
     }
 
-    public static Vector2f subtractAndCreate(Vector2f first, Vector2f second) {
-        return new Vector2f(
-                first.x - second.x,
-                first.y - second.y
-        );
-    }
-
     @Override
-    public void subtract(Vector2f other) {
+    public void subtractFromMe(Vector2f other) {
         x -= other.x;
         y -= other.y;
     }
 
     @Override
+    public Vector2f add(Vector2f second) {
+        return new Vector2f(
+                this.x + second.x,
+                this.y + second.y
+        );
+    }
+
+    @Override
+    public Vector2f subtract(Vector2f second) {
+        return new Vector2f(
+                this.x - second.x,
+                this.y - second.y
+        );
+    }
+
+    @Override
     public void multiplyByScalar(float scalar) {
-        x = Math.round(x * scalar * 10.0f) / 10.0f;
-        y = Math.round(y * scalar * 10.0f) / 10.0f;
+        x *= scalar;
+        y *= scalar;
     }
 
     @Override
     public void divideByScalar(float scalar) throws ArithmeticException {
-        if (scalar == 0) {
+        if (scalar - 0 < epsilon) {
             throw new ArithmeticException("Деление на 0");
         }
-        x = Math.round(x / scalar * 10.0f) / 10.0f;
-        y = Math.round(y / scalar * 10.0f) / 10.0f;
+        multiplyByScalar(1/scalar);
     }
 
     @Override
     public float length() {
-        float length = (float) Math.sqrt(Math.pow(x,2) + Math.pow(y,2));
-        return Math.round(length * 10.0f) / 10.0f;
+        return (float) Math.sqrt(x * x + y * y);
     }
 
     @Override
     public void normalize() {
         float length = length();
-        if (length == 0) {
+        if (length - 0 < epsilon) {
             throw new ArithmeticException("Длина равна 0, невозможно нормализовать вектор");
         }
-        x = Math.round(x / length * 10.0f) / 10.0f;
-        y = Math.round(y / length * 10.0f) / 10.0f;
+        multiplyByScalar(1/length);
     }
 
     @Override

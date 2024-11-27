@@ -30,18 +30,19 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         });
     }
 
-    public static Matrix3f addWithCreation(Matrix3f first, Matrix3f second) {
+    @Override
+    public Matrix3f add(Matrix3f second) {
         float[][] result = new float[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                result[i][j] = first.elements[i][j] + second.elements[i][j];
+                result[i][j] = this.elements[i][j] + second.elements[i][j];
             }
         }
         return new Matrix3f(result);
     }
 
     @Override
-    public void add(Matrix3f other) {
+    public void addToMe(Matrix3f other) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 elements[i][j] += other.elements[i][j];
@@ -49,18 +50,19 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         }
     }
 
-    public static Matrix3f subtractWithCreation(Matrix3f first, Matrix3f second) {
+    @Override
+    public Matrix3f subtract(Matrix3f second) {
         float[][] result = new float[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                result[i][j] = first.elements[i][j] - second.elements[i][j];
+                result[i][j] = this.elements[i][j] - second.elements[i][j];
             }
         }
         return new Matrix3f(result);
     }
 
     @Override
-    public void subtract(Matrix3f other) {
+    public void subtractFromMe(Matrix3f other) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 elements[i][j] -= other.elements[i][j];

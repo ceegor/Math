@@ -29,7 +29,7 @@ public class Matrix4fTest {
                 {17, 17, 17, 17}
         });
 
-        m1.add(m2);
+        m1.addToMe(m2);
 
         Assertions.assertEquals(expected.toString(), m1.toString());
     }
@@ -57,7 +57,9 @@ public class Matrix4fTest {
                 {17, 17, 17, 17}
         });
 
-        Assertions.assertEquals(expected.toString(), Matrix4f.addWithCreation(m1, m2).toString());
+        Matrix4f sum = m1.add(m2);
+
+        Assertions.assertEquals(expected.toString(), sum.toString());
     }
 
     @Test
@@ -83,7 +85,7 @@ public class Matrix4fTest {
                 {117, 126, 135, 144}
         });
 
-        m1.subtract(m2);
+        m1.subtractFromMe(m2);
 
         Assertions.assertEquals(expected.toString(), m1.toString());
     }
@@ -111,7 +113,9 @@ public class Matrix4fTest {
                 {117, 126, 135, 144}
         });
 
-        Assertions.assertEquals(expected.toString(), Matrix4f.subtractWithCreation(m1, m2).toString());
+        Matrix4f difference = m1.subtract(m2);
+
+        Assertions.assertEquals(expected.toString(), difference.toString());
     }
 
     @Test

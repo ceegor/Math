@@ -17,7 +17,7 @@ public class Vectors4fTest {
 
     @Test
     void testAddWithCreation() {
-        Vector4f result = Vector4f.addAndCreate(v1, v2);
+        Vector4f result = v1.add(v2);
         assertEquals(5.0, result.getX(), 1e-7);
         assertEquals(5.0, result.getY(), 1e-7);
         assertEquals(5.0, result.getZ(), 1e-7);
@@ -26,7 +26,7 @@ public class Vectors4fTest {
 
     @Test
     void testAdd() {
-        v1.add(v2);
+        v1.addToMe(v2);
         assertEquals(5.0, v1.getX(), 1e-7);
         assertEquals(5.0, v1.getY(), 1e-7);
         assertEquals(5.0, v1.getZ(), 1e-7);
@@ -35,7 +35,7 @@ public class Vectors4fTest {
 
     @Test
     void testSubtractWithCreation() {
-        Vector4f result = Vector4f.subtractAndCreate(v1, v2);
+        Vector4f result = v1.subtract(v2);
         assertEquals(-3.0, result.getX(), 1e-7);
         assertEquals(-1.0, result.getY(), 1e-7);
         assertEquals(1.0, result.getZ(), 1e-7);
@@ -44,7 +44,7 @@ public class Vectors4fTest {
 
     @Test
     void testSubtract() {
-        v1.subtract(v2);
+        v1.subtractFromMe(v2);
         assertEquals(-3.0,v1.getX(), 1e-7);
         assertEquals(-1.0,v1.getY(), 1e-7);
         assertEquals(1.0, v1.getZ(), 1e-7);

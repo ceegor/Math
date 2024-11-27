@@ -33,29 +33,30 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
         });
     }
 
-
-    public static Matrix4f addWithCreation(Matrix4f first, Matrix4f second) {
+    @Override
+    public Matrix4f add(Matrix4f second) {
         float[][] result = new float[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                result[i][j] = first.elements[i][j] + second.elements[i][j];
-            }
-        }
-        return new Matrix4f(result);
-    }
-
-    public static Matrix4f subtractWithCreation(Matrix4f first, Matrix4f second) {
-        float[][] result = new float[4][4];
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                result[i][j] = first.elements[i][j] - second.elements[i][j];
+                result[i][j] = this.elements[i][j] + second.elements[i][j];
             }
         }
         return new Matrix4f(result);
     }
 
     @Override
-    public void add(Matrix4f other) {
+    public Matrix4f subtract(Matrix4f second) {
+        float[][] result = new float[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                result[i][j] = this.elements[i][j] - second.elements[i][j];
+            }
+        }
+        return new Matrix4f(result);
+    }
+
+    @Override
+    public void addToMe(Matrix4f other) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 elements[i][j] += other.elements[i][j];
@@ -64,7 +65,7 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
-    public void subtract(Matrix4f other) {
+    public void subtractFromMe(Matrix4f other) {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 elements[i][j] -= other.elements[i][j];

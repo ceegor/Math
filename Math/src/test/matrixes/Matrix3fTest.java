@@ -26,7 +26,7 @@ public class Matrix3fTest {
                 {10, 10, 10}
         });
 
-        m1.add(m2);
+        m1.addToMe(m2);
 
         Assertions.assertEquals(expected.toString(), m1.toString());
     }
@@ -51,7 +51,9 @@ public class Matrix3fTest {
                 {10, 10, 10}
         });
 
-        Assertions.assertEquals(expected.toString(), Matrix3f.addWithCreation(m1, m2).toString());
+        Matrix3f sum = m1.add(m2);
+
+        Assertions.assertEquals(expected.toString(), sum.toString());
     }
 
     @Test
@@ -74,7 +76,7 @@ public class Matrix3fTest {
                 {4, 6, 8}
         });
 
-        m1.subtract(m2);
+        m1.subtractFromMe(m2);
 
         Assertions.assertEquals(expected.toString(), m1.toString());
     }
@@ -99,7 +101,9 @@ public class Matrix3fTest {
                 {4, 6, 8}
         });
 
-        Assertions.assertEquals(expected.toString(), Matrix3f.subtractWithCreation(m1, m2).toString());
+        Matrix3f difference = m1.subtract(m2);
+
+        Assertions.assertEquals(expected.toString(), difference.toString());
     }
 
     @Test
