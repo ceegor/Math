@@ -6,9 +6,9 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
 
     private final float[][] elements;
 
-    public Matrix3f(float[][] elements) {
+    public Matrix3f(float[][] elements) throws IndexOutOfBoundsException {
         if (elements.length != 3 || elements[0].length != 3) {
-            throw new IllegalArgumentException("Матрица должна быть 3x3");
+            throw new IndexOutOfBoundsException("Матрица должна быть 3x3");
         }
         this.elements = new float[3][3];
         for (int i = 0; i < 3; i++) {
@@ -25,9 +25,9 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
-    public void changeRow(int row, float[] values) throws IllegalArgumentException {
+    public void changeRow(int row, float[] values) throws IndexOutOfBoundsException {
         if (values.length != 3 || row > 3) {
-            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
         }
         for (int i = 0; i < 3; i++) {
             elements[row - 1][i] = values[i];
@@ -35,9 +35,9 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
-    public void changeColumn(int column, float[] values) throws IllegalArgumentException {
+    public void changeColumn(int column, float[] values) throws IndexOutOfBoundsException {
         if (values.length != 3 || column > 3) {
-            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
         }
         for (int i = 0; i < 3; i++) {
             elements[i][column - 1] = values[i];
@@ -161,11 +161,11 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
-    public Matrix3f findInverseMatrix() throws IllegalArgumentException {
+    public Matrix3f findInverseMatrix() throws ArithmeticException {
         float determinant = findDeterminant();
 
         if (determinant - 0 < epsilon_matrix) {
-            throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");
+            throw new ArithmeticException("Матрица не имеет обратной матрицы (определитель равен нулю)");
         }
 
         float[][] inverse = new float[3][3];

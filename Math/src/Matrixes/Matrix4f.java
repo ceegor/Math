@@ -7,9 +7,9 @@ import java.util.IllegalFormatException;
 public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     private final float[][] elements;
 
-    public Matrix4f(float[][] elements) {
+    public Matrix4f(float[][] elements) throws IndexOutOfBoundsException {
         if (elements.length != 4 || elements[0].length != 4) {
-            throw new IllegalArgumentException("Матрица должна быть 4x4");
+            throw new IndexOutOfBoundsException("Матрица должна быть 4x4");
         }
         this.elements = new float[4][4];
         for (int i = 0; i < 4; i++) {
@@ -26,9 +26,9 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
-    public void changeRow(int row, float[] values) throws IllegalArgumentException {
+    public void changeRow(int row, float[] values) throws IndexOutOfBoundsException {
         if (values.length != 4 || row > 4) {
-            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
         }
         for (int i = 0; i < 4; i++) {
             elements[row - 1][i] = values[i];
@@ -36,9 +36,9 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
-    public void changeColumn(int column, float[] values) throws IllegalArgumentException {
+    public void changeColumn(int column, float[] values) throws IndexOutOfBoundsException {
         if (values.length != 4 || column > 4) {
-            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
         }
         for (int i = 0; i < 4; i++) {
             elements[i][column - 1] = values[i];
@@ -164,10 +164,10 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
-    public Matrix4f findInverseMatrix() throws IllegalArgumentException {
+    public Matrix4f findInverseMatrix() throws ArithmeticException {
         float determinant = findDeterminant();
-        if (determinant == 0) {
-            throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");
+        if (determinant - 0 < epsilon_matrix) {
+            throw new ArithmeticException("Матрица не имеет обратной матрицы (определитель равен нулю)");
         }
 
         float[][] inverse = new float[4][4];
