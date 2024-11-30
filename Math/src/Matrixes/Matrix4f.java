@@ -141,6 +141,21 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
+    public void transposeMe() {
+        float[][] result = new float[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                result[j][i] = elements[i][j];
+            }
+        }
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                elements[i][j] = result[i][j];
+            }
+        }
+    }
+
+    @Override
     public float findDeterminant() {
         return elements[0][0] * minor(0, 0) -
                 elements[0][1] * minor(0, 1) +

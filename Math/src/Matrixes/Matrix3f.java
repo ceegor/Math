@@ -136,6 +136,21 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
+    public void transposeMe() {
+        float[][] result = new float[3][3];
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result[j][i] = elements[i][j];
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                elements[i][j] = result[i][j];
+            }
+        }
+    }
+
+    @Override
     public float findDeterminant() {
         return elements[0][0]*elements[1][1]*elements[2][2] +
                         elements[0][1]*elements[1][2]*elements[2][0] +
@@ -149,7 +164,7 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     public Matrix3f findInverseMatrix() throws IllegalArgumentException {
         float determinant = findDeterminant();
 
-        if (determinant == 0) {
+        if (determinant - 0 < epsilon_matrix) {
             throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");
         }
 

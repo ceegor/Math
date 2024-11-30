@@ -246,6 +246,27 @@ public class Matrix4fTest {
     }
 
     @Test
+    public void testTransposeMe() {
+        Matrix4f matrix = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        Matrix4f expected = new Matrix4f(new float[][] {
+                {1, 5, 9, 13},
+                {2, 6, 10, 14},
+                {3, 7, 11, 15},
+                {4, 8, 12, 16}
+        });
+
+        matrix.transposeMe();
+
+        Assertions.assertEquals(expected.toString(), matrix.toString());
+    }
+
+    @Test
     public void testFindDeterminant() {
         Matrix4f matrix = new Matrix4f(new float[][] {
                 {1, 2, 3, 4},
