@@ -23,6 +23,16 @@ public class Vector3f implements Vector<Vector3f> {
         return z;
     }
 
+    public Vector2f deleteOneDimension() {
+        return new Vector2f(x, y);
+    }
+
+    public Vector4f addOneDimension() {
+        System.out.println("Введите значение w: ");
+        float w = scanner.nextFloat();
+        return new Vector4f(x, y, z, w);
+    }
+
     @Override
     public boolean isEqual(Vector3f other) {
         return Math.abs(x - other.x) < epsilon &&

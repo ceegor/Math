@@ -29,6 +29,14 @@ public class Vector4f implements Vector<Vector4f> {
         return w;
     }
 
+    public Vector2f deleteTwoDimensions() {
+        return new Vector2f(x, y);
+    }
+
+    public Vector3f deleteOneDimension() {
+        return new Vector3f(x, y, z);
+    }
+
     @Override
     public boolean isEqual(Vector4f other) {
         return Math.abs(x - other.x) < epsilon &&

@@ -2,8 +2,11 @@ package Matrixes;
 
 import Vectors.Vector;
 
+import java.util.Scanner;
+
 public interface Matrix<T extends Matrix<T, V>, V extends Vector<V>>{
     float epsilon_matrix = 1e-7f;
+
 
     void changeElement(int row, int column, float value);
     void changeRow(int row, float[] values);

@@ -17,6 +17,19 @@ public class Vector2f implements Vector<Vector2f> {
         return y;
     }
 
+    public Vector3f addOneDimension() {
+        System.out.println("Введите значение z: ");
+        float z = scanner.nextFloat();
+        return new Vector3f(x, y, z);
+    }
+
+    public Vector4f addTwoDimensions() {
+        System.out.println("Введите значения z и w: ");
+        float z = scanner.nextFloat();
+        float w = scanner.nextFloat();
+        return new Vector4f(x, y, z, w);
+    }
+
     @Override
     public boolean isEqual(Vector2f other) {
         return Math.abs(x - other.x) < epsilon &&
