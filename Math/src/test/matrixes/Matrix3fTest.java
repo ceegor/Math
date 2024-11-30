@@ -6,6 +6,61 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Matrix3fTest {
+
+    @Test
+    public void testChangeElement() {
+        Matrix3f m = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        });
+
+        Matrix3f expected = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 10, 6},
+                {7, 8, 9}
+        });
+
+        m.changeElement(2,2,10);
+        Assertions.assertEquals(expected.toString(), m.toString());
+    }
+
+    @Test
+    public void testChangeRow() {
+        Matrix3f m = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        });
+
+        Matrix3f expected = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 10, 6},
+                {7, 8, 9}
+        });
+
+        m.changeRow(2,new float[] {4,10,6});
+        Assertions.assertEquals(expected.toString(), m.toString());
+    }
+
+    @Test
+    public void testChangeColumn() {
+        Matrix3f m = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        });
+
+        Matrix3f expected = new Matrix3f(new float[][] {
+                {1, 2, 3},
+                {4, 10, 6},
+                {7, 8, 9}
+        });
+
+        m.changeColumn(2,new float[] {2,10,8});
+        Assertions.assertEquals(expected.toString(), m.toString());
+    }
+
     @Test
     public void testAdd() {
         Matrix3f m1 = new Matrix3f(new float[][] {

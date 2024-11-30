@@ -90,6 +90,20 @@ public class Vector4f implements Vector<Vector4f> {
     }
 
     @Override
+    public Vector4f multiplyByScalarWithCreation(float scalar) {
+        return new Vector4f(x*scalar, y*scalar, z*scalar, w*scalar);
+    }
+
+    @Override
+    public Vector4f divideByScalarWithCreation(float scalar) throws ArithmeticException {
+        if (scalar - 0 < epsilon) {
+            throw new ArithmeticException("Деление на 0");
+        }
+        return multiplyByScalarWithCreation(1/scalar);
+    }
+
+
+    @Override
     public float length() {
         return (float) Math.sqrt(
                 x * x + y * y + z * z + w * w

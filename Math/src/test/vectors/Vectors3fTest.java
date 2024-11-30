@@ -1,10 +1,20 @@
 package test.vectors;
 
+import Vectors.Vector2f;
 import Vectors.Vector3f;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Vectors3fTest {
+
+    @Test
+    void isLengthEqualTest() {
+        Vector3f v1 = new Vector3f(2,2, 1);
+        Vector3f v2 = new Vector3f((float)Math.sqrt(7), 1, 1);
+        boolean result = v1.isLengthEqual(v2);
+        Assertions.assertTrue(result);
+    }
+
     @Test
     void sum() {
         Vector3f v1 = new Vector3f(1, 2, 3);
@@ -55,12 +65,30 @@ public class Vectors3fTest {
     }
 
     @Test
+    void multiplyByScalarWithCreation() {
+        Vector3f v = new Vector3f(1, 2, 3);
+        Vector3f res = v.multiplyByScalarWithCreation(2);
+        Assertions.assertEquals(2.0, res.getX(), 1e-7);
+        Assertions.assertEquals(4.0, res.getY(), 1e-7);
+        Assertions.assertEquals(6.0, res.getZ(), 1e-7);
+    }
+
+    @Test
     void divideByScalar() {
         Vector3f v = new Vector3f(6, 9, 12);
         v.divideByScalar(3);
         Assertions.assertEquals(2.0, v.getX(), 1e-7);
         Assertions.assertEquals(3.0, v.getY(), 1e-7);
         Assertions.assertEquals(4.0, v.getZ(), 1e-7);
+    }
+
+    @Test
+    void divideByScalarWithCreation() {
+        Vector3f v = new Vector3f(6, 9, 12);
+        Vector3f res = v.divideByScalarWithCreation(3);
+        Assertions.assertEquals(2.0, res.getX(), 1e-7);
+        Assertions.assertEquals(3.0, res.getY(), 1e-7);
+        Assertions.assertEquals(4.0, res.getZ(), 1e-7);
     }
 
     @Test
@@ -117,5 +145,16 @@ public class Vectors3fTest {
         Assertions.assertEquals(-3.0, crossProduct.getX(), 1e-7);
         Assertions.assertEquals(6.0, crossProduct.getY(), 1e-7);
         Assertions.assertEquals(-3.0, crossProduct.getZ(), 1e-7);
+    }
+
+    @Test
+    void vectorProductToMe() {
+        Vector3f v1 = new Vector3f(1, 2, 3);
+        Vector3f v2 = new Vector3f(4, 5, 6);
+
+        v1.vectorProductToMe(v2);
+        Assertions.assertEquals(-3.0,v1.getX(), 1e-7);
+        Assertions.assertEquals(6.0, v1.getY(), 1e-7);
+        Assertions.assertEquals(-3.0,v1.getZ(), 1e-7);
     }
 }

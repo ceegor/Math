@@ -6,6 +6,70 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Matrix4fTest {
+
+    @Test
+    public void testChangeElement() {
+        Matrix4f m1 = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        Matrix4f expected = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, -7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        m1.changeElement(2,3,-7);
+
+        Assertions.assertEquals(expected.toString(), m1.toString());
+    }
+
+    @Test
+    public void testChangeRow() {
+        Matrix4f m1 = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        Matrix4f expected = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, -7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        m1.changeRow(2,new float[] {5,6,-7,8});
+
+        Assertions.assertEquals(expected.toString(), m1.toString());
+    }
+
+    @Test
+    public void testChangeColumn() {
+        Matrix4f m1 = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, 7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        Matrix4f expected = new Matrix4f(new float[][] {
+                {1, 2, 3, 4},
+                {5, 6, -7, 8},
+                {9, 10, 11, 12},
+                {13, 14, 15, 16}
+        });
+
+        m1.changeColumn(3,new float[] {3,-7,11,15});
+
+        Assertions.assertEquals(expected.toString(), m1.toString());
+    }
+
     @Test
     public void testAdd() {
         Matrix4f m1 = new Matrix4f(new float[][] {

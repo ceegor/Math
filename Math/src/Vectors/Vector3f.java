@@ -78,6 +78,19 @@ public class Vector3f implements Vector<Vector3f> {
     }
 
     @Override
+    public Vector3f multiplyByScalarWithCreation(float scalar) {
+        return new Vector3f(x*scalar, y*scalar, z*scalar);
+    }
+
+    @Override
+    public Vector3f divideByScalarWithCreation(float scalar) throws ArithmeticException {
+        if (scalar - 0 < epsilon) {
+            throw new ArithmeticException("Деление на 0");
+        }
+        return multiplyByScalarWithCreation(1/scalar);
+    }
+
+    @Override
     public float length() {
         return (float) Math.sqrt(
                         x * x +
@@ -107,6 +120,15 @@ public class Vector3f implements Vector<Vector3f> {
                 y * other.z - z * other.y,
                 z * other.x - x * other.z,
                 x * other.y - y * other.x);
+    }
+
+    public void vectorProductToMe(Vector3f other) {
+        float newX = y * other.z - z * other.y;
+        float newY = z * other.x - x * other.z;
+        float newZ = x * other.y - y * other.x;
+        x = newX;
+        y = newY;
+        z = newZ;
     }
 
     @Override

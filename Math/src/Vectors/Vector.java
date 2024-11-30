@@ -4,6 +4,9 @@ public interface Vector<T> {
     float epsilon = 1e-7f;
 
     boolean isEqual(T other);
+    default boolean isLengthEqual(Vector<T> other) {
+        return (length() - other.length() < epsilon);
+    }
 
     void addToMe(T other);
     void subtractFromMe(T other);
@@ -13,6 +16,9 @@ public interface Vector<T> {
 
     void multiplyByScalar(float scalar);
     void divideByScalar(float scalar) throws ArithmeticException;
+
+    T multiplyByScalarWithCreation(float scalar);
+    T divideByScalarWithCreation(float scalar) throws ArithmeticException;
 
     float length();
 

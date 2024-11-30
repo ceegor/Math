@@ -2,6 +2,8 @@ package Matrixes;
 
 import Vectors.Vector4f;
 
+import java.util.IllegalFormatException;
+
 public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     private final float[][] elements;
 
@@ -12,6 +14,34 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
         this.elements = new float[4][4];
         for (int i = 0; i < 4; i++) {
             System.arraycopy(elements[i], 0, this.elements[i], 0, 4);
+        }
+    }
+
+    @Override
+    public void changeElement(int row, int column, float value) throws IndexOutOfBoundsException {
+        if (row > 4 || column > 4) {
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
+        }
+        elements[row - 1][column - 1] = value;
+    }
+
+    @Override
+    public void changeRow(int row, float[] values) throws IllegalArgumentException {
+        if (values.length != 4 || row > 4) {
+            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+        }
+        for (int i = 0; i < 4; i++) {
+            elements[row - 1][i] = values[i];
+        }
+    }
+
+    @Override
+    public void changeColumn(int column, float[] values) throws IllegalArgumentException {
+        if (values.length != 4 || column > 4) {
+            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+        }
+        for (int i = 0; i < 4; i++) {
+            elements[i][column - 1] = values[i];
         }
     }
 
@@ -119,7 +149,7 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     }
 
     @Override
-    public Matrix4f findInverseMatrix() {
+    public Matrix4f findInverseMatrix() throws IllegalArgumentException {
         float determinant = findDeterminant();
         if (determinant == 0) {
             throw new IllegalArgumentException("Матрица не имеет обратной матрицы (определитель равен нулю)");

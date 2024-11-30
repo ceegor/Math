@@ -3,7 +3,9 @@ package Matrixes;
 import Vectors.*;
 
 public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
+
     private final float[][] elements;
+
     public Matrix3f(float[][] elements) {
         if (elements.length != 3 || elements[0].length != 3) {
             throw new IllegalArgumentException("Матрица должна быть 3x3");
@@ -11,6 +13,34 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
         this.elements = new float[3][3];
         for (int i = 0; i < 3; i++) {
             System.arraycopy(elements[i], 0, this.elements[i], 0, 3);
+        }
+    }
+
+    @Override
+    public void changeElement(int row, int column, float value) throws IndexOutOfBoundsException {
+        if (row > 3 || column > 3) {
+            throw new IndexOutOfBoundsException("Вы вышли за пределы матрицы");
+        }
+        elements[row - 1][column - 1] = value;
+    }
+
+    @Override
+    public void changeRow(int row, float[] values) throws IllegalArgumentException {
+        if (values.length != 3 || row > 3) {
+            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+        }
+        for (int i = 0; i < 3; i++) {
+            elements[row - 1][i] = values[i];
+        }
+    }
+
+    @Override
+    public void changeColumn(int column, float[] values) throws IllegalArgumentException {
+        if (values.length != 3 || column > 3) {
+            throw new IllegalArgumentException("Вы вышли за пределы матрицы");
+        }
+        for (int i = 0; i < 3; i++) {
+            elements[i][column - 1] = values[i];
         }
     }
 
@@ -116,7 +146,7 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     }
 
     @Override
-    public Matrix3f findInverseMatrix() {
+    public Matrix3f findInverseMatrix() throws IllegalArgumentException {
         float determinant = findDeterminant();
 
         if (determinant == 0) {

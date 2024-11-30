@@ -66,6 +66,19 @@ public class Vector2f implements Vector<Vector2f> {
     }
 
     @Override
+    public Vector2f multiplyByScalarWithCreation(float scalar) {
+        return new Vector2f(x*scalar, y*scalar);
+    }
+
+    @Override
+    public Vector2f divideByScalarWithCreation(float scalar) throws ArithmeticException {
+        if (scalar - 0 < epsilon) {
+            throw new ArithmeticException("Деление на 0");
+        }
+        return multiplyByScalarWithCreation(1/scalar);
+    }
+
+    @Override
     public float length() {
         return (float) Math.sqrt(x * x + y * y);
     }

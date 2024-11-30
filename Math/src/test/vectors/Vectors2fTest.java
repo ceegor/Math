@@ -1,10 +1,20 @@
 package test.vectors;
 
 import Vectors.Vector2f;
+import Vectors.Vector3f;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class Vectors2fTest {
+
+    @Test
+    void isLengthEqualTest() {
+        Vector2f v1 = new Vector2f(2,2);
+        Vector2f v2 = new Vector2f((float)Math.sqrt(7), 1);
+        boolean result = v1.isLengthEqual(v2);
+        Assertions.assertTrue(result);
+    }
+
     @Test
     void sumWithCreation() {
         Vector2f v1 = new Vector2f(5, 7);
@@ -50,12 +60,29 @@ public class Vectors2fTest {
     }
 
     @Test
+    void multiplyByScalarWithCreation() {
+        Vector2f v = new Vector2f(1, 2);
+        Vector2f res = v.multiplyByScalarWithCreation(3);
+        Assertions.assertEquals(3.0, res.getX(), 1e-7);
+        Assertions.assertEquals(6.0, res.getY(), 1e-7);
+    }
+
+    @Test
     void divideByScalar() {
         Vector2f v = new Vector2f(6, 3);
         v.divideByScalar(3);
         Assertions.assertEquals(2.0, v.getX(), 1e-7);
         Assertions.assertEquals(1.0, v.getY(), 1e-7);
     }
+
+    @Test
+    void divideByScalarWithCreation() {
+        Vector2f v = new Vector2f(6, 3);
+        Vector2f res = v.divideByScalarWithCreation(3);
+        Assertions.assertEquals(2.0, res.getX(), 1e-7);
+        Assertions.assertEquals(1.0, res.getY(), 1e-7);
+    }
+
 
     @Test
     void divideByZeroThrowsException() {
