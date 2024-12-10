@@ -13,6 +13,13 @@ public class Vector4f implements Vector<Vector4f> {
         this.w = w;
     }
 
+    public Vector4f(Vector3f vec, float w) {
+        this.x = vec.getX();
+        this.y = vec.getY();
+        this.z = vec.getZ();
+        this.w = w;
+    }
+
     public float getX() {
         return x;
     }
