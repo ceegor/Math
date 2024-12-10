@@ -7,6 +7,18 @@ import java.util.IllegalFormatException;
 public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     private final float[][] elements;
 
+    public Matrix4f (float x11, float x12, float x13, float x14,
+                     float x21, float x22, float x23, float x24,
+                     float x31, float x32, float x33, float x34,
+                     float x41, float x42, float x43, float x44) {
+        this.elements = new float[][] {
+                {x11, x12, x13, x14},
+                {x21, x22, x23, x24},
+                {x31, x32, x33, x34},
+                {x41, x42, x43, x44}
+        };
+    }
+
     public Matrix4f(float[][] elements) throws IndexOutOfBoundsException {
         if (elements.length != 4 || elements[0].length != 4) {
             throw new IndexOutOfBoundsException("Матрица должна быть 4x4");

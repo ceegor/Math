@@ -6,6 +6,16 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
 
     private final float[][] elements;
 
+    public Matrix3f (float x11, float x12, float x13,
+                     float x21, float x22, float x23,
+                     float x31, float x32, float x33){
+        this.elements = new float[][] {
+                {x11, x12, x13},
+                {x21, x22, x23},
+                {x31, x32, x33},
+        };
+    }
+
     public Matrix3f(float[][] elements) throws IndexOutOfBoundsException {
         if (elements.length != 3 || elements[0].length != 3) {
             throw new IndexOutOfBoundsException("Матрица должна быть 3x3");
