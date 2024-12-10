@@ -72,7 +72,7 @@ public class Vector2f implements Vector<Vector2f> {
 
     @Override
     public void divideByScalar(float scalar) throws ArithmeticException {
-        if (scalar - 0 < epsilon) {
+        if (Math.abs(scalar) < epsilon) {
             throw new ArithmeticException("Деление на 0");
         }
         multiplyByScalar(1/scalar);
@@ -85,7 +85,7 @@ public class Vector2f implements Vector<Vector2f> {
 
     @Override
     public Vector2f divideByScalarWithCreation(float scalar) throws ArithmeticException {
-        if (scalar - 0 < epsilon) {
+        if (Math.abs(scalar) < epsilon) {
             throw new ArithmeticException("Деление на 0");
         }
         return multiplyByScalarWithCreation(1/scalar);
@@ -99,7 +99,7 @@ public class Vector2f implements Vector<Vector2f> {
     @Override
     public void normalize() {
         float length = length();
-        if (length - 0 < epsilon) {
+        if (Math.abs(length) < epsilon) {
             throw new ArithmeticException("Длина равна 0, невозможно нормализовать вектор");
         }
         multiplyByScalar(1/length);

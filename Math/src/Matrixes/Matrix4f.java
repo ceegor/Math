@@ -178,7 +178,7 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     @Override
     public Matrix4f findInverseMatrix() throws ArithmeticException {
         float determinant = findDeterminant();
-        if (determinant - 0 < epsilon_matrix) {
+        if (Math.abs(determinant) < epsilon_matrix) {
             throw new ArithmeticException("Матрица не имеет обратной матрицы (определитель равен нулю)");
         }
 
@@ -195,7 +195,7 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
             for (int j = 0; j < 4; j++) {
                 inverse[i][j] /= determinant;
 
-                if (Math.abs(inverse[i][j]) < 1e-10) {
+                if (Math.abs(inverse[i][j]) < epsilon_matrix) {
                     inverse[i][j] = 0.0f;
                 }
             }

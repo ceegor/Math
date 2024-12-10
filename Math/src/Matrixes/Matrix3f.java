@@ -174,34 +174,30 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
     public Matrix3f findInverseMatrix() throws ArithmeticException {
         float determinant = findDeterminant();
 
-        if (determinant - 0 < epsilon_matrix) {
+        if (Math.abs(determinant) < epsilon_matrix) {
             throw new ArithmeticException("Матрица не имеет обратной матрицы (определитель равен нулю)");
         }
 
         float[][] inverse = new float[3][3];
 
-        // Вычисляем алгебраические дополнения
-        inverse[0][0] = minor(0, 0) * 1;
-        inverse[0][1] = minor(0, 1) * -1;
-        inverse[0][2] = minor(0, 2) * 1;
-
-        inverse[1][0] = minor(1, 0) * -1;
-        inverse[1][1] = minor(1, 1) * 1;
-        inverse[1][2] = minor(1, 2) * -1;
-
-        inverse[2][0] = minor(2, 0) * 1;
-        inverse[2][1] = minor(2, 1) * -1;
-        inverse[2][2] = minor(2, 2) * 1;
-
-        Matrix3f inverseMatrix = new Matrix3f(inverse).transpose();
-
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                inverseMatrix.elements[i][j] /= determinant;
+                float sign = ((i + j) % 2 == 0) ? 1 : -1;
+                inverse[j][i] = sign * minor(i, j);
             }
         }
 
-        return inverseMatrix;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                inverse[i][j] /= determinant;
+
+                if (Math.abs(inverse[i][j]) < epsilon_matrix) {
+                    inverse[i][j] = 0.0f;
+                }
+            }
+        }
+
+        return new Matrix3f(inverse);
     }
 
     private float minor(int row, int col) {

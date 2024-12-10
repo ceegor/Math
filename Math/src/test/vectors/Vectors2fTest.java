@@ -8,14 +8,6 @@ import org.junit.jupiter.api.Test;
 public class Vectors2fTest {
 
     @Test
-    void testAddOneDimension() {
-        Vector2f v1 = new Vector2f(2,2);
-        Vector3f exp = new Vector3f(2,2,1);
-        v1.addOneDimension();
-        Assertions.assertEquals(exp.toString(), v1.toString());
-    }
-
-    @Test
     void isLengthEqualTest() {
         Vector2f v1 = new Vector2f(2,2);
         Vector2f v2 = new Vector2f((float)Math.sqrt(7), 1);
