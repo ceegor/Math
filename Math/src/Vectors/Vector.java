@@ -8,7 +8,7 @@ public interface Vector<T> {
 
     boolean isEqual(T other);
     default boolean isLengthEqual(Vector<T> other) {
-        return (length() - other.length() < epsilon);
+        return (Math.abs(length() - other.length()) < epsilon);
     }
 
     void addToMe(T other);
