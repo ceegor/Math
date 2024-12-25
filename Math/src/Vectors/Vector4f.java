@@ -1,5 +1,7 @@
 package Vectors;
 
+import java.util.Objects;
+
 public class Vector4f implements Vector<Vector4f> {
     private float x;
     private float y;
@@ -145,5 +147,17 @@ public class Vector4f implements Vector<Vector4f> {
     @Override
     public String toString() {
         return "Vector4f(" + x + ", " + y + ", " + z + ", " + w + ")";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Vector4f vector4f)) return false;
+        return Float.compare(x, vector4f.x) == 0 && Float.compare(y, vector4f.y) == 0 && Float.compare(z, vector4f.z) == 0 && Float.compare(w, vector4f.w) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y, z, w);
     }
 }
