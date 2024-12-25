@@ -2,6 +2,9 @@ package Matrixes;
 
 import Vectors.*;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
 
     private final float[][] elements;
@@ -231,6 +234,18 @@ public class Matrix3f implements Matrix<Matrix3f, Vector3f> {
             sb.append("]\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Matrix3f matrix3f)) return false;
+        return Objects.deepEquals(elements, matrix3f.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(elements);
     }
 
 }

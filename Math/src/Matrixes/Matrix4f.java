@@ -2,7 +2,9 @@ package Matrixes;
 
 import Vectors.Vector4f;
 
+import java.util.Arrays;
 import java.util.IllegalFormatException;
+import java.util.Objects;
 
 public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
     private final float[][] elements;
@@ -239,5 +241,17 @@ public class Matrix4f implements Matrix<Matrix4f, Vector4f> {
             sb.append("]\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Matrix4f matrix4f)) return false;
+        return Objects.deepEquals(elements, matrix4f.elements);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(elements);
     }
 }
